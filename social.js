@@ -14,7 +14,7 @@ Social.prototype.available = function(callback) {
 	}, null, "Social", "available", []);
 };
 
-Social.prototype.share = function(message, url, image) {
+Social.prototype.share = function(message, image, url) {
     cordova.exec(null, null, "Social", "share", [message, image, url]);
 };
     
