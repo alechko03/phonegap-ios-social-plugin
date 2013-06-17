@@ -32,11 +32,19 @@
     
     NSString *text = [arguments objectAtIndex:1];
     
+    bool isSharingImage = false;
+    
     NSString *imageName = [arguments objectAtIndex:2];
     UIImage *image = nil;
     
-    if (imageName) {
+    NSLog(@"The value is = %@",imageName);
+    
+    if (![imageName isEqualToString:@"NO_IMAGE"]) {
         image = [UIImage imageNamed:imageName];
+        isSharingImage = true;
+    } else {
+        NSLog(@"Im in No IMAGE");
+        isSharingImage = false;
     }
     
     NSString *urlString = [arguments objectAtIndex:3];
@@ -46,7 +54,13 @@
         url = [NSURL URLWithString:urlString];
     }
     
-    NSArray *activityItems = [[NSArray alloc] initWithObjects:text, image, url, nil];
+    NSArray *activityItems;
+    
+    if (isSharingImage) {
+         activityItems = [[NSArray alloc] initWithObjects:text,image,url, nil];
+    } else {
+        activityItems = [[NSArray alloc] initWithObjects:text,image,url, nil];
+    }
     
     UIActivity *activity = [[UIActivity alloc] init];
     
